@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fields name="filter">
+		<field name="search" type="text" label="COM_ATTRS_FILTER_SEARCH" description="COM_ATTRS_FILTER_SEARCH_DESC" hint="COM_ATTRS_FILTER_SEARCH_HINT" />
+		<field name="published" type="list" label="COM_ATTRS_FILTER_PUBLISHED" description="COM_ATTRS_FILTER_PUBLISHED_DESC" onchange="this.form.submit();" >
+			<option value="">JOPTION_SELECT_PUBLISHED</option>
+			<option value="1">JPUBLISHED</option>
+			<option value="0">JUNPUBLISHED</option>
+		</field>
+		<field name="tp" type="list" label="COM_ATTRS_FILTER_TP" description="COM_ATTRS_FILTER_TP_DESC" onchange="this.form.submit();" >
+			<option value="">COM_ATTRS_FILTER_TP_SELECT</option>
+			<option value="text">COM_ATTRS_TYPE_TEXT</option>
+			<option value="textarea">COM_ATTRS_TYPE_TEXTAREA</option>
+			<option value="editor">COM_ATTRS_TYPE_EDITOR</option>
+			<option value="list">COM_ATTRS_TYPE_LIST</option>
+			<option value="media">COM_ATTRS_TYPE_MEDIA</option>
+		</field>
+		<field name="dest" type="list" label="COM_ATTRS_FILTER_DEST" description="COM_ATTRS_FILTER_DEST_DESC" onchange="this.form.submit();" >
+			<option value="">COM_ATTRS_FILTER_DEST_SELECT</option>
+			<option value="destsystem">COM_ATTRS_DEST_SYSTEM</option>
+			<option value="destmenu">COM_ATTRS_DEST_MENU</option>
+			<option value="destarticles">COM_ATTRS_DEST_ARTICLES</option>
+			<option value="destcategoties">COM_ATTRS_DEST_CATEGORIES</option>
+			<option value="destmodules">COM_ATTRS_DEST_MODULES</option>
+			<option value="destplugins">COM_ATTRS_DEST_PLUGINS</option>
+		</field>
+	</fields>
+	<fields name="list">
+		<field name="fullordering" type="list" label="JGLOBAL_SORT_BY" description="JGLOBAL_SORT_BY" onchange="this.form.submit();" default="title ASC" >
+			<option value="">JGLOBAL_SORT_BY</option>
+			<option value="published ASC">JSTATUS_ASC</option>
+			<option value="published DESC">JSTATUS_DESC</option>
+			<option value="title ASC">JGLOBAL_TITLE_ASC</option>
+			<option value="title DESC">JGLOBAL_TITLE_DESC</option>
+			<option value="id ASC">JGRID_HEADING_ID_ASC</option>
+			<option value="id DESC">JGRID_HEADING_ID_DESC</option>
+		</field>
+		<field name="limit" type="limitbox" label="JGLOBAL_LIMIT" description="JGLOBAL_LIMIT" class="input-mini" default="20" onchange="this.form.submit();" />
+	</fields>
+</form>
