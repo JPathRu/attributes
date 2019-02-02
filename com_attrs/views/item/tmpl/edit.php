@@ -14,7 +14,7 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 		
 		var msg_sn = '', msg_dest = '', msg_valid = '';
 		
-		var sn = /^[a-z_]+$/.test(document.getElementById('jform_name').value);
+		var sn = /^[a-zA-Z0-9_]+$/.test(document.getElementById('jform_name').value);
 		
 		var ds = document.getElementById('jform_destsystem0').checked;
 		var dn = document.getElementById('jform_destmenu0').checked;
