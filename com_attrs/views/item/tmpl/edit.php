@@ -8,13 +8,13 @@ use Joomla\CMS\HTML\HTMLHelper;
 HTMLHelper::_('bootstrap.tooltip');
 HTMLHelper::_('behavior.formvalidation');
 HTMLHelper::_('formbehavior.chosen', 'select');
-?>
-<script type="text/javascript">
+
+JFactory::getDocument()->addScriptDeclaration("
 	Joomla.submitbutton = function (task) {
 		
 		var msg_sn = '', msg_dest = '', msg_valid = '';
 		
-		var sn = /^[a-zA-Z0-9_]+$/.test(document.getElementById('jform_name').value);
+		var sn = /^[a-z_]+$/.test(document.getElementById('jform_name').value);
 		
 		var ds = document.getElementById('jform_destsystem0').checked;
 		var dn = document.getElementById('jform_destmenu0').checked;
@@ -31,20 +31,22 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 			Joomla.submitform(task, document.getElementById('item-form'));
 		} else {
 			if (!sn) {
-				msg_sn = "<?php echo $this->escape(Text::_('COM_ATTRS_NAME_ERROR')); ?>";
+				msg_sn = '" . $this->escape(Text::_('COM_ATTRS_NAME_ERROR')) . "';
 			}
 			if (!dest) {
-				msg_dest = "<?php echo $this->escape(Text::_('COM_ATTRS_DEST_ERROR')); ?>";
+				msg_dest = '" . $this->escape(Text::_('COM_ATTRS_DEST_ERROR')) . "';
 			}
 			if (!valid) {
-				msg_valid = "<?php echo $this->escape(Text::_('JGLOBAL_VALIDATION_FORM_FAILED')); ?>";
+				msg_valid = '" . $this->escape(Text::_('JGLOBAL_VALIDATION_FORM_FAILED')) . "';
 			}
 			
-			Joomla.JText.load({error:"<?php echo $this->escape(Text::_('ERROR')); ?>"});
-			Joomla.renderMessages({"error":[msg_sn, msg_dest, msg_valid]});
+			Joomla.JText.load({error:'" . $this->escape(Text::_('ERROR')) . "'});
+			Joomla.renderMessages({'error':[msg_sn, msg_dest, msg_valid]});
 		}
 	}
-</script>
+");
+?>
+
 <form action="<?php echo Route::_('index.php?option=com_attrs&layout=edit&id=' . $this->form->getValue('id')); ?>" method="post" name="adminForm" id="item-form" class="form-validate" enctype="multipart/form-data">
 	
 	<div class="form-horizontal">
