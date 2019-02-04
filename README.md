@@ -22,7 +22,25 @@ Each attributed attribute name is prefixed with `attrs_`. You can get the attrib
 // default
 $attrValue = $item->params->get("arrts_{$attrName}", '');
 
+// for system
+$attrValue = Factory::getConfig->get("arrts_{$attrName}", '');
+
 // for articles
 $attribs = json_decode($item->attribs, true);
 $attrValue = $attribs["arrts_{$attrName}"];
+
+
+/*
+Using helper (it is recommended because checks the status of the attribute (published / unpublished), it is not necessary to specify the prefix 'attrs_')
+
+AttrsHelper::ATTR_DEST_SYSTEM = 'sytems'
+AttrsHelper::ATTR_DEST_MENU = 'menu'
+AttrsHelper::ATTR_DEST_ARTICLES = 'articles'
+AttrsHelper::ATTR_DEST_CATEGORIES = 'categories'
+AttrsHelper::ATTR_DEST_MODULES = 'modules'
+AttrsHelper::ATTR_DEST_PLUGINS = 'plugins'
+*/
+
+JLoader::register('AttrsHelper', JPATH_ADMINISTRATOR . '/components/com_attrs/helpers/attrs.php');
+$attrValue = AttrsHelper::getAttr("{$attrName}", AttrsHelper::ATTR_DEST_ARTICLES, $article->id);
 ```
