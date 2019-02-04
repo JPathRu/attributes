@@ -19,7 +19,7 @@ Each attributed attribute name is prefixed with `attrs_`. You can get the attrib
 ---
 
 Using helper. It is recommended because checks the status of the attribute (published / unpublished), 
-it is not necessary to specify the prefix `attrs_`.
+it is not necessary to specify the prefix `attrs_`. Skip the third parameter to get the attribute value from the system config.
 
 ```
 /*
