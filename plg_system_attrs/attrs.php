@@ -32,16 +32,14 @@ class plgSystemAttrs extends CMSPlugin
             return;
         }
 
-        $view = $this->input->getCmd('view', '');
         $option = $this->input->getCmd('option', '');
-        $layout = $this->input->getCmd('layout', '');
         $formname = $form->getName();
 
         $isSystem = $option == 'com_config' && $formname == 'com_config.application';
         $isMenu = $option == 'com_menus' && $formname == 'com_menus.item';
         $isArticle = $option == 'com_content' && $formname == 'com_content.article';
         $isCategory = $option == 'com_categories' && $formname == 'com_categories.category' . $this->input->getCmd('extension', '');
-        $isModule = $option == 'com_modules' && $formname == 'com_modules.module';
+        $isModule = ($option == 'com_modules' && $formname == 'com_modules.module') || ($option == 'com_advancedmodules' && $formname == 'com_advancedmodules.module');
         $isPlugin = $option == 'com_plugins' && $formname == 'com_plugins.plugin';;
         
         $tp = $isSystem ? 'destsystem' : '';
