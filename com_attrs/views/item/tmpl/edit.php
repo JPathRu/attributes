@@ -9,7 +9,7 @@ HTMLHelper::_('bootstrap.tooltip');
 HTMLHelper::_('behavior.formvalidation');
 HTMLHelper::_('formbehavior.chosen', 'select');
 
-JFactory::getDocument()->addScriptDeclaration("
+Factory::getDocument()->addScriptDeclaration("
 	Joomla.submitbutton = function (task) {
 		
 		var msg_sn = '', msg_dest = '', msg_valid = '';
@@ -31,16 +31,16 @@ JFactory::getDocument()->addScriptDeclaration("
 			Joomla.submitform(task, document.getElementById('item-form'));
 		} else {
 			if (!sn) {
-				msg_sn = '" . $this->escape(Text::_('COM_ATTRS_NAME_ERROR')) . "';
+				msg_sn = '" . Text::_('COM_ATTRS_NAME_ERROR') . "';
 			}
 			if (!dest) {
-				msg_dest = '" . $this->escape(Text::_('COM_ATTRS_DEST_ERROR')) . "';
+				msg_dest = '" . Text::_('COM_ATTRS_DEST_ERROR') . "';
 			}
 			if (!valid) {
-				msg_valid = '" . $this->escape(Text::_('JGLOBAL_VALIDATION_FORM_FAILED')) . "';
+				msg_valid = '" . Text::_('JGLOBAL_VALIDATION_FORM_FAILED') . "';
 			}
 			
-			Joomla.JText.load({error:'" . $this->escape(Text::_('ERROR')) . "'});
+			Joomla.JText.load({error:'" . Text::_('ERROR') . "'});
 			Joomla.renderMessages({'error':[msg_sn, msg_dest, msg_valid]});
 		}
 	}
