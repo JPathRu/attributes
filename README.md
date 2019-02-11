@@ -2,26 +2,27 @@
 
 ### EN
 
-The component implements additional attributes for system elements, menus, materials, categories, modules and plugins.
+The component implements additional attributes for system elements, menus, articles, categories, modules and plugins.
 
-Attribute values are stored in the parameters of the corresponding element, the params field (for materials, the attribs field).
+Attribute values are stored in the parameters of the corresponding element, the `params` field (for articles in the `attribs` field).
 
-Each attributed attribute name is prefixed with `attrs_`. You can get the attribute value in the standard way indicated below.
+Every attribute name is prefixed with `attrs_` prefix. You can get the attribute value by the standard way described below.
 
 ### RU
 
 Компонент реализует дополнительные атрибуты для элементов системы, меню, материалов, категорий, модулей и плагинов.
 
-Значения атрибутов хранятся в параметрах соответствующего элемента, поле params (для материалов поле attribs).
+Значения атрибутов хранятся в параметрах соответствующего элемента, поле `params` (для материалов поле `attribs`).
 
 К каждому указанному системному имени атрибута добавляется префикс `attrs_`. Вы можете получить значение атрибута стандартным нижеуказанным способом.
 
----
+### Usage
 
-Using helper. It is recommended because checks the status of the attribute (published / unpublished), 
-it is not necessary to specify the prefix `attrs_`. Skip the third parameter to get the attribute value from the system config.
+#### With helper
 
-```
+It is recommended because it checks the status of the attribute (published / unpublished) and it is not necessary to specify the prefix `attrs_`. Skip the third parameter to get the attribute value from the system config.
+
+```php
 /*
 AttrsHelper::ATTR_DEST_SYSTEM = 'sytems'
 AttrsHelper::ATTR_DEST_MENU = 'menu'
@@ -35,8 +36,8 @@ JLoader::register('AttrsHelper', JPATH_ADMINISTRATOR . '/components/com_attrs/he
 $attrValue = AttrsHelper::getAttr("{$attrName}", AttrsHelper::ATTR_DEST_ARTICLES, $article->id);
 ```
 
-Without helper (not recommended)
-```
+#### Without helper (not recommended)
+```php
 // default
 $attrValue = $item->params->get("arrts_{$attrName}", '');
 
