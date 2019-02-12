@@ -19,6 +19,8 @@
 			<option value="">COM_ATTRS_FILTER_DEST_SELECT</option>
 			<option value="destsystem">COM_ATTRS_DEST_SYSTEM</option>
 			<option value="destmenu">COM_ATTRS_DEST_MENU</option>
+			<option value="destusers">COM_ATTRS_DEST_USERS</option>
+			<option value="destcontacts">COM_ATTRS_DEST_CONTACTS</option>
 			<option value="destarticles">COM_ATTRS_DEST_ARTICLES</option>
 			<option value="destcategoties">COM_ATTRS_DEST_CATEGORIES</option>
 			<option value="destmodules">COM_ATTRS_DEST_MODULES</option>

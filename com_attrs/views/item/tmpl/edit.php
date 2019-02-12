@@ -9,7 +9,7 @@ HTMLHelper::_('bootstrap.tooltip');
 HTMLHelper::_('behavior.formvalidation');
 HTMLHelper::_('formbehavior.chosen', 'select');
 
-Factory::getDocument()->addScriptDeclaration("
+JFactory::getDocument()->addScriptDeclaration("
 	Joomla.submitbutton = function (task) {
 		
 		var msg_sn = '', msg_dest = '', msg_valid = '';
@@ -18,12 +18,14 @@ Factory::getDocument()->addScriptDeclaration("
 		
 		var ds = document.getElementById('jform_destsystem0').checked;
 		var dn = document.getElementById('jform_destmenu0').checked;
+		var du = document.getElementById('jform_destusers0').checked;
+		var dt = document.getElementById('jform_destcontacts0').checked;
 		var da = document.getElementById('jform_destarticles0').checked;
 		var dc = document.getElementById('jform_destcategories0').checked;
 		var dm = document.getElementById('jform_destmodules0').checked;
 		var dp = document.getElementById('jform_destplugins0').checked;
 		
-		var dest = ds || dn || da || dc || dm || dp;
+		var dest = ds || dn || du || dt || da || dc || dm || dp;
 		
 		var valid = document.formvalidator.isValid(document.id('item-form'));
 		
@@ -31,16 +33,16 @@ Factory::getDocument()->addScriptDeclaration("
 			Joomla.submitform(task, document.getElementById('item-form'));
 		} else {
 			if (!sn) {
-				msg_sn = '" . Text::_('COM_ATTRS_NAME_ERROR') . "';
+				msg_sn = '" . $this->escape(Text::_('COM_ATTRS_NAME_ERROR')) . "';
 			}
 			if (!dest) {
-				msg_dest = '" . Text::_('COM_ATTRS_DEST_ERROR') . "';
+				msg_dest = '" . $this->escape(Text::_('COM_ATTRS_DEST_ERROR')) . "';
 			}
 			if (!valid) {
-				msg_valid = '" . Text::_('JGLOBAL_VALIDATION_FORM_FAILED') . "';
+				msg_valid = '" . $this->escape(Text::_('JGLOBAL_VALIDATION_FORM_FAILED')) . "';
 			}
 			
-			Joomla.JText.load({error:'" . Text::_('ERROR') . "'});
+			Joomla.JText.load({error:'" . $this->escape(Text::_('ERROR')) . "'});
 			Joomla.renderMessages({'error':[msg_sn, msg_dest, msg_valid]});
 		}
 	}
@@ -68,14 +70,24 @@ Factory::getDocument()->addScriptDeclaration("
 					
 					<?php echo $this->form->renderField('class'); ?>
 
+					<hr>
+					
+					<?php echo $this->form->renderField('published'); ?>
+					
+					<?php echo $this->form->renderField('id'); ?>
+					
 				</div>
 			</div>
-			<div class="span3">
+			<div class="span6">
 				<div class="form-horizontal">
 					
 					<?php echo $this->form->renderField('destsystem'); ?>
 					
 					<?php echo $this->form->renderField('destmenu'); ?>
+					
+					<?php echo $this->form->renderField('destusers'); ?>
+					
+					<?php echo $this->form->renderField('destcontacts'); ?>
 					
 					<?php echo $this->form->renderField('destarticles'); ?>
 					
@@ -84,15 +96,6 @@ Factory::getDocument()->addScriptDeclaration("
 					<?php echo $this->form->renderField('destmodules'); ?>
 					
 					<?php echo $this->form->renderField('destplugins'); ?>
-					
-				</div>
-			</div>
-			<div class="span3">
-				<div class="form-vertical">
-					
-					<?php echo $this->form->renderField('published'); ?>
-					
-					<?php echo $this->form->renderField('id'); ?>
 					
 				</div>
 			</div>

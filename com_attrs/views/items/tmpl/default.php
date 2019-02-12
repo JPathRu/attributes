@@ -43,13 +43,8 @@ $listDirn = $this->escape($this->state->get('list.direction'));
 						<th width="1%" class="hidden-phone center"><?php echo HTMLHelper::_('grid.checkall'); ?></th>
 						<th width="5%" class="center" style="min-width:55px;"><?php echo HTMLHelper::_('searchtools.sort', 'JSTATUS', 'published', $listDirn, $listOrder); ?></th>
 						<th class="has-context"><?php echo HTMLHelper::_('searchtools.sort', 'JGLOBAL_TITLE', 'title', $listDirn, $listOrder); ?></th>
-						<th width="10%"><?php echo Text::_('COM_ATTRS_TYPE'); ?></th>
-						<th width="5%" class="hidden-phone center nowrap"><?php echo Text::_('COM_ATTRS_DEST_SYSTEM'); ?></th>
-						<th width="5%" class="hidden-phone center nowrap"><?php echo Text::_('COM_ATTRS_DEST_MENU'); ?></th>
-						<th width="5%" class="hidden-phone center nowrap"><?php echo Text::_('COM_ATTRS_DEST_ARTICLES'); ?></th>
-						<th width="5%" class="hidden-phone center nowrap"><?php echo Text::_('COM_ATTRS_DEST_CATEGORIES'); ?></th>
-						<th width="5%" class="hidden-phone center nowrap"><?php echo Text::_('COM_ATTRS_DEST_MODULES'); ?></th>
-						<th width="5%" class="hidden-phone center nowrap"><?php echo Text::_('COM_ATTRS_DEST_PLUGINS'); ?></th>
+						<th class="hidden-phone"><?php echo Text::_('COM_ATTRS_TYPE'); ?></th>
+						<th width="20%" colspan="8"><?php echo Text::_('COM_ATTRS_DEST'); ?></th>
 						<th width="1%" class="hidden-phone center nowrap"><?php echo HTMLHelper::_('searchtools.sort', 'JGRID_HEADING_ID', 'id', $listDirn, $listOrder); ?></th>
 					</tr>
 				</thead>
@@ -71,7 +66,7 @@ $listDirn = $this->escape($this->state->get('list.direction'));
 							<a href="<?php echo Route::_('index.php?option=com_attrs&task=item.edit&id=' . $item->id); ?>">
 							<?php } ?>
 							
-							<?php echo $this->escape($item->title); ?>
+							<strong><?php echo $this->escape($item->title); ?></strong>
 							
 							<?php if ($this->canDo) { ?>
 							</a>
@@ -92,18 +87,21 @@ $listDirn = $this->escape($this->state->get('list.direction'));
 							<?php } ?>
 						</td>
 						
-						<td class="center hidden-phone"><span class="icon-<?php echo ($item->destsystem ? '' : 'un'); ?>publish"></span></td>
-						<td class="center hidden-phone"><span class="icon-<?php echo ($item->destmenu ? '' : 'un'); ?>publish"></span></td>
-						<td class="center hidden-phone"><span class="icon-<?php echo ($item->destarticles ? '' : 'un'); ?>publish"></span></td>
-						<td class="center hidden-phone"><span class="icon-<?php echo ($item->destcategories ? '' : 'un'); ?>publish"></span></td>
-						<td class="center hidden-phone"><span class="icon-<?php echo ($item->destmodules ? '' : 'un'); ?>publish"></span></td>
-						<td class="center hidden-phone"><span class="icon-<?php echo ($item->destplugins ? '' : 'un'); ?>publish"></span></td>
+						<td class="center hidden-phone"><span class="hasTooltip icon-joomla <?php echo ($item->destsystem ? '' : 'muted'); ?>" title="<?php echo Text::_('COM_ATTRS_DEST_SYSTEM'); ?>: <?php echo Text::_('COM_ATTRS_PUBLISH_' . $item->destsystem); ?>"></span></td>
+						<td class="center hidden-phone"><span class="hasTooltip icon-list <?php echo ($item->destmenu ? '' : 'muted'); ?>" title="<?php echo Text::_('COM_ATTRS_DEST_MENU'); ?>: <?php echo Text::_('COM_ATTRS_PUBLISH_' . $item->destmenu); ?>"></span></td>
+						<td class="center hidden-phone"><span class="hasTooltip icon-users -<?php echo ($item->destusers ? '' : 'muted'); ?>" title="<?php echo Text::_('COM_ATTRS_DEST_USERS'); ?>: <?php echo Text::_('COM_ATTRS_PUBLISH_' . $item->destusers); ?>"></span></td>
+						<td class="center hidden-phone"><span class="hasTooltip icon-address <?php echo ($item->destcontacts ? '' : 'muted'); ?>" title="<?php echo Text::_('COM_ATTRS_DEST_CONTACTS'); ?>: <?php echo Text::_('COM_ATTRS_PUBLISH_' . $item->destcontacts); ?>"></span></td>
+						<td class="center hidden-phone"><span class="hasTooltip icon-stack <?php echo ($item->destarticles ? '' : 'muted'); ?>" title="<?php echo Text::_('COM_ATTRS_DEST_ARTICLES'); ?>: <?php echo Text::_('COM_ATTRS_PUBLISH_' . $item->destarticles); ?>"></span></td>
+						<td class="center hidden-phone"><span class="hasTooltip icon-folder <?php echo ($item->destcategories ? '' : 'muted'); ?>" title="<?php echo Text::_('COM_ATTRS_DEST_CATEGORIES'); ?>: <?php echo Text::_('COM_ATTRS_PUBLISH_' . $item->destcategories); ?>"></span></td>
+						<td class="center hidden-phone"><span class="hasTooltip icon-cube <?php echo ($item->destmodules ? '' : 'muted'); ?>" title="<?php echo Text::_('COM_ATTRS_DEST_MODULES'); ?>: <?php echo Text::_('COM_ATTRS_PUBLISH_' . $item->destmodules); ?>"></span></td>
+						<td class="center hidden-phone"><span class="hasTooltip icon-power-cord <?php echo ($item->destplugins ? '' : 'muted'); ?>" title="<?php echo Text::_('COM_ATTRS_DEST_PLUGINS'); ?>: <?php echo Text::_('COM_ATTRS_PUBLISH_' . $item->destplugins); ?>"></span></td>
 						
 						<td class="center hidden-phone"><?php echo $item->id; ?></td>
 					</tr>
 					<?php } ?>
 				</tbody>
 			</table>
+			<style>.table [class*="icon-"].muted {color: #bbb;}</style>
 				
 			<?php echo $this->pagination->getListFooter(); ?>
 				

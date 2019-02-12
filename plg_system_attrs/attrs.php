@@ -7,6 +7,8 @@ use Joomla\CMS\Form\Form;
 use Joomla\CMS\Form\FormField;
 use Joomla\CMS\Language\Text;
 
+JLoader::register('AttrsHelper', JPATH_ADMINISTRATOR . '/components/com_attrs/helpers/attrs.php');
+
 class plgSystemAttrs extends CMSPlugin
 {
     private
@@ -21,7 +23,57 @@ class plgSystemAttrs extends CMSPlugin
         $this->isAdmin = Factory::getApplication()->isClient('administrator');
         $this->loadLanguage();
     }
-    
+
+    public function onContentPrepare($context, &$article, $params, $page = 0)
+    {
+        if (!class_exists('AttrsHelper')) {
+            return true;
+        }
+
+        if ($context === 'com_finder.indexer') {
+            return true;
+        }
+
+        if (strpos($article->text, '{attrs|') === false) {
+            return true;
+        }
+
+        $types = [
+            AttrsHelper::ATTR_DEST_SYSTEM,
+            AttrsHelper::ATTR_DEST_MENU,
+            AttrsHelper::ATTR_DEST_USERS,
+            AttrsHelper::ATTR_DEST_CONTACTS,
+            AttrsHelper::ATTR_DEST_ARTICLES,
+            AttrsHelper::ATTR_DEST_CATEGORIES,
+            AttrsHelper::ATTR_DEST_MODULES,
+            AttrsHelper::ATTR_DEST_PLUGINS,
+        ];
+
+        preg_match_all('/{attrs(.*?)}/i', $article->text, $matches, PREG_SET_ORDER);
+
+        if ($matches) {
+            foreach ($matches as $match) {
+                $matcheslist = explode('|', $match[1]);
+
+                if (!array_key_exists(3, $matcheslist)) {
+                    continue;
+                }
+
+                $type = strtolower(trim($matcheslist[1]));
+                if (!in_array($type, $types)) {
+                    continue;
+                }
+
+                $id = trim($matcheslist[2]);
+                $attrName = trim($matcheslist[3]);
+
+                $output = AttrsHelper::getAttr($attrName, $type, $id);
+
+                $article->text = str_replace($match[0], $output, $article->text);
+            }
+        }
+    }
+
     public function onContentPrepareForm($form, $data)
     {
         if (!$this->isAdmin) {
@@ -37,14 +89,22 @@ class plgSystemAttrs extends CMSPlugin
 
         $isSystem = $option == 'com_config' && $formname == 'com_config.application';
         $isMenu = $option == 'com_menus' && $formname == 'com_menus.item';
+        $isUsers = $option == 'com_users' && $formname == 'com_users.user';
+        $isContacts = $option == 'com_contact' && $formname == 'com_contact.contact';
         $isArticle = $option == 'com_content' && $formname == 'com_content.article';
         $isCategory = $option == 'com_categories' && $formname == 'com_categories.category' . $this->input->getCmd('extension', '');
         $isModule = ($option == 'com_modules' && $formname == 'com_modules.module') || ($option == 'com_advancedmodules' && $formname == 'com_advancedmodules.module');
         $isPlugin = $option == 'com_plugins' && $formname == 'com_plugins.plugin';;
-        
+
         $tp = $isSystem ? 'destsystem' : '';
         if (!$tp) {
             $tp = $isMenu ? 'destmenu' : '';
+        }
+        if (!$tp) {
+            $tp = $isUsers ? 'destusers' : '';
+        }
+        if (!$tp) {
+            $tp = $isContacts ? 'destcontacts' : '';
         }
         if (!$tp) {
             $tp = $isArticle ? 'destarticles' : '';
@@ -73,13 +133,13 @@ class plgSystemAttrs extends CMSPlugin
         }
 
         $xml = '<?xml version="1.0" encoding="utf-8"?><form>';
-        
+
         if ($isSystem) {
             $xml .= '<fieldset name="cookie">';
             $xml .= '<field name="attrssystemspacer" type="spacer" hr="true" />';
             $xml .= '<field name="attrssystemtitle" type="note" label="' . Text::_('PLG_ATTRS_TAB_LABEL') . '"/>';
         }
-        if ($isMenu || $isCategory || $isPlugin) {
+        if ($isMenu || $isUsers || $isContacts || $isCategory || $isPlugin) {
             $xml .= '<fields name="params"><fieldset name="attrs" label="' . Text::_('PLG_ATTRS_TAB_LABEL') . '">';
         }
         if ($isArticle) {
@@ -88,13 +148,13 @@ class plgSystemAttrs extends CMSPlugin
         if ($isModule) {
             $xml .= '<fieldset name="attrs" label="' . Text::_('PLG_ATTRS_TAB_LABEL') . '"><fields name="params">';
         }
-        
+
         foreach ($fields as $f) {
-            
+
             $name = ' name="attrs_' . $f->name . '"';
             $label = ' label="' . $f->title . '"';
             $class = $f->class ? ' class="' . $f->class . '"' : ' class="input-xlarge"';
-            
+
             switch ($f->tp) {
                 case 'text':
                     $xml .= '<field type="text"' . $name . $label . $class . ($f->filter ? ' filter="' . $f->filter . '"' : '') . '/>';
@@ -121,7 +181,7 @@ class plgSystemAttrs extends CMSPlugin
                     break;
             }
         }
-        
+
         if ($isSystem) {
             $xml .= '</fieldset>';
         } elseif ($isModule) {
@@ -131,10 +191,10 @@ class plgSystemAttrs extends CMSPlugin
         }
 
         $xml .= '</form>';
-        
+
         $xml = new \SimpleXMLElement($xml);
         $form->setFields($xml, null, false);
-        
+
         return true;
     }
 

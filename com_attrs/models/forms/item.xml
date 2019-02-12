@@ -32,6 +32,14 @@
 		    <option value="1">JYES</option>
 		    <option value="0">JNO</option>
 	    </field>
+        <field name="destusers" type="radio" label="COM_ATTRS_DEST_USERS" default="0" class="btn-group">
+		    <option value="1">JYES</option>
+		    <option value="0">JNO</option>
+	    </field>
+        <field name="destcontacts" type="radio" label="COM_ATTRS_DEST_CONTACTS" default="0" class="btn-group">
+		    <option value="1">JYES</option>
+		    <option value="0">JNO</option>
+	    </field>
         <field name="destarticles" type="radio" label="COM_ATTRS_DEST_ARTICLES" default="0" class="btn-group">
 		    <option value="1">JYES</option>
 		    <option value="0">JNO</option>

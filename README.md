@@ -2,7 +2,16 @@
 
 ### EN
 
-The component implements additional attributes for system elements, menus, articles, categories, modules and plugins.
+The component implements additional attributes for:
+
+- system params,
+- menu,
+- users,
+- contacts,
+- articles,
+- categories,
+- modules,
+- plugins.
 
 Attribute values are stored in the parameters of the corresponding element, the `params` field (for articles in the `attribs` field).
 
@@ -10,7 +19,16 @@ Every attribute name is prefixed with `attrs_` prefix. You can get the attribute
 
 ### RU
 
-Компонент реализует дополнительные атрибуты для элементов системы, меню, материалов, категорий, модулей и плагинов.
+Компонент реализует дополнительные атрибуты для следующих элементов:
+
+- системые параметры,
+- меню,
+- пользователи,
+- контакты,
+- материалы,
+- категории,
+- модули,
+- плагины.
 
 Значения атрибутов хранятся в параметрах соответствующего элемента, поле `params` (для материалов поле `attribs`).
 
@@ -26,6 +44,8 @@ It is recommended because it checks the status of the attribute (published / unp
 /*
 AttrsHelper::ATTR_DEST_SYSTEM = 'sytems'
 AttrsHelper::ATTR_DEST_MENU = 'menu'
+AttrsHelper::ATTR_DEST_USERS = 'users'
+AttrsHelper::ATTR_DEST_CONTACTS = 'contacts'
 AttrsHelper::ATTR_DEST_ARTICLES = 'articles'
 AttrsHelper::ATTR_DEST_CATEGORIES = 'categories'
 AttrsHelper::ATTR_DEST_MODULES = 'modules'
@@ -37,6 +57,7 @@ $attrValue = AttrsHelper::getAttr("{$attrName}", AttrsHelper::ATTR_DEST_ARTICLES
 ```
 
 #### Without helper (not recommended)
+
 ```php
 // default
 $attrValue = $item->params->get("arrts_{$attrName}", '');
@@ -49,3 +70,16 @@ $attribs = json_decode($article->attribs, true);
 $attrValue = $attribs["arrts_{$attrName}"];
 
 ```
+
+#### In the editor, for content plugin
+
+```
+{attrs|dest|id|attrName}
+```
+
+- `attrs` - reserved word
+- `dest` - belonging to a specific type of record, one of: system, menu, users, contacts, articles, categories, modules, plugins
+- `id` - ID of the corresponding entry for the specified property, specify 0 for systems
+- `attrName` - attribute system name
+
+**Important**: Unpublished attributes are ignored.

@@ -8,6 +8,8 @@ class AttrsHelper
 {
 	public const ATTR_DEST_SYSTEM = 'sytems';
 	public const ATTR_DEST_MENU = 'menu';
+	public const ATTR_DEST_USERS = 'users';
+	public const ATTR_DEST_CONTACTS = 'contacts';
 	public const ATTR_DEST_ARTICLES = 'articles';
 	public const ATTR_DEST_CATEGORIES = 'categories';
 	public const ATTR_DEST_MODULES = 'modules';
@@ -45,6 +47,21 @@ class AttrsHelper
 
 			case self::ATTR_DEST_MENU:
 				$table = Table::getInstance('Menu');
+				break;
+
+			case self::ATTR_DEST_USERS:
+				$table = Table::getInstance('User');
+				break;
+
+			case self::ATTR_DEST_CONTACTS:
+				$db = Factory::getDbo();
+				$query = $db->getQuery(true)
+					->select('params')
+					->from('#__contact_details')
+					->where('id=' . (int)$id);
+				$data = $db->setQuery($query)->loadResult();
+				$params = new Registry($data);
+				$attrValue = $params->get($attrName, '');
 				break;
 
 			case self::ATTR_DEST_ARTICLES:
