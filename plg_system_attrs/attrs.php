@@ -53,7 +53,7 @@ class plgSystemAttrs extends CMSPlugin
 
         if ($matches) {
             foreach ($matches as $match) {
-                $matcheslist = explode('|', $match[1]);
+                $matcheslist = explode(';', $match[1]);
 
                 if (!array_key_exists(3, $matcheslist)) {
                     continue;
@@ -68,6 +68,10 @@ class plgSystemAttrs extends CMSPlugin
                 $attrName = trim($matcheslist[3]);
 
                 $output = AttrsHelper::getAttr($attrName, $type, $id);
+
+                if (is_array($output)) {
+                    $output = implode(', ', $output);
+                }
 
                 $article->text = str_replace($match[0], $output, $article->text);
             }

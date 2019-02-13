@@ -10,6 +10,8 @@ CREATE TABLE IF NOT EXISTS `#__attrs` (
 	`class` VARCHAR(50) NOT NULL,
 	`destsystem` TINYINT NOT NULL,
 	`destmenu` TINYINT NOT NULL,
+	`destusers` TINYINT NOT NULL,
+	`destcontacts` TINYINT NOT NULL,
 	`destarticles` TINYINT NOT NULL,
 	`destcategories` TINYINT NOT NULL,
 	`destmodules` TINYINT NOT NULL,
