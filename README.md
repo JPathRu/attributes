@@ -1,6 +1,6 @@
 # Attributes
 
-_description in Russian ![here](README.ru.md)_
+_description in Russian [here](README.ru.md)_
 
 The component implements additional attributes for:
 
