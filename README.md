@@ -30,7 +30,7 @@ Every attribute name is prefixed with `attrs_` prefix. You can get the attribute
 - `id` - ID of the corresponding entry for the specified property, specify 0 for systems
 - `attrName` - attribute system name
 
-**Important**: Unpublished attributes are ignored. Images are output without markup, only the path.
+**Important**: Unpublished attributes are ignored. Images are output without markup, only the path. Arrays are displayed as a list of values separated by commas.
 
 **Example**: You have created an attribute with the name test for a material with ID = 5, to get its value, insert the following line in the editor: `{attrs;articles;5;test}`.
 
