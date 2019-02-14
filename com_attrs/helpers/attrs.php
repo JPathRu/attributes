@@ -6,7 +6,7 @@ use Joomla\Registry\Registry;
 
 class AttrsHelper
 {
-	public const ATTR_DEST_SYSTEM = 'sytems';
+	public const ATTR_DEST_SYSTEM = 'system';
 	public const ATTR_DEST_MENU = 'menu';
 	public const ATTR_DEST_USERS = 'users';
 	public const ATTR_DEST_CONTACTS = 'contacts';

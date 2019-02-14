@@ -19,7 +19,7 @@ Every attribute name is prefixed with `attrs_` prefix. You can get the attribute
 
 ## Usage
 
-#### In the editor, for content plugin
+### Shortcode, for use in content editor
 
 ```
 {attrs;dest;id;attrName}
@@ -40,7 +40,7 @@ It is recommended because it checks the status of the attribute (published / unp
 
 ```php
 /*
-AttrsHelper::ATTR_DEST_SYSTEM = 'sytems'
+AttrsHelper::ATTR_DEST_SYSTEM = 'system'
 AttrsHelper::ATTR_DEST_MENU = 'menu'
 AttrsHelper::ATTR_DEST_USERS = 'users'
 AttrsHelper::ATTR_DEST_CONTACTS = 'contacts'
