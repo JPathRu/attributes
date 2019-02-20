@@ -1,2 +1,2 @@
-ALTER TABLE `#__attrs` ADD IF NOT EXISTS `destfields` TINYINT NOT NULL;
-ALTER TABLE `#__attrs` ADD IF NOT EXISTS `desttags` TINYINT NOT NULL;
+ALTER TABLE `#__attrs` ADD `destfields` TINYINT NOT NULL;
+ALTER TABLE `#__attrs` ADD `desttags` TINYINT NOT NULL;
