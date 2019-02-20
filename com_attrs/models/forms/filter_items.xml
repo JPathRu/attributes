@@ -25,6 +25,8 @@
 			<option value="destcategoties">COM_ATTRS_DEST_CATEGORIES</option>
 			<option value="destmodules">COM_ATTRS_DEST_MODULES</option>
 			<option value="destplugins">COM_ATTRS_DEST_PLUGINS</option>
+			<option value="destfields">COM_ATTRS_DEST_FIELDS</option>
+			<option value="desttags">COM_ATTRS_DEST_TAGS</option>
 		</field>
 	</fields>
 	<fields name="list">

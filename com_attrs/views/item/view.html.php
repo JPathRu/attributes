@@ -23,6 +23,7 @@ class AttrsViewItem extends HtmlView
 
 		$isNew = $this->item->id == 0;
 		ToolBarHelper::title(Text::_('COM_ATTRS_ITEM_TITLE_' . ($isNew ? 'ADD' : 'MOD')), 'puzzle');
+		Factory::getApplication()->input->set( 'hidemainmenu', true );
 
 		$canDo = ContentHelper::getActions('com_attrs');
 		if ($canDo->get('core.manage')) {

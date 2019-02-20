@@ -4,7 +4,6 @@ use Joomla\CMS\Factory;
 use Joomla\CMS\Plugin\CMSPlugin;
 use Joomla\CMS\Input\Input;
 use Joomla\CMS\Form\Form;
-use Joomla\CMS\Form\FormField;
 use Joomla\CMS\Language\Text;
 
 JLoader::register('AttrsHelper', JPATH_ADMINISTRATOR . '/components/com_attrs/helpers/attrs.php');
@@ -34,7 +33,7 @@ class plgSystemAttrs extends CMSPlugin
             return true;
         }
 
-        if (strpos($article->text, '{attrs|') === false) {
+        if (strpos($article->text, '{attrs;') === false) {
             return true;
         }
 
@@ -47,8 +46,11 @@ class plgSystemAttrs extends CMSPlugin
             AttrsHelper::ATTR_DEST_CATEGORIES,
             AttrsHelper::ATTR_DEST_MODULES,
             AttrsHelper::ATTR_DEST_PLUGINS,
+            AttrsHelper::ATTR_DEST_FIELDS,
+            AttrsHelper::ATTR_DEST_TAGS
         ];
 
+        $matches = [];
         preg_match_all('/{attrs(.*?)}/i', $article->text, $matches, PREG_SET_ORDER);
 
         if ($matches) {
@@ -96,9 +98,11 @@ class plgSystemAttrs extends CMSPlugin
         $isUsers = $option == 'com_users' && $formname == 'com_users.user';
         $isContacts = $option == 'com_contact' && $formname == 'com_contact.contact';
         $isArticle = $option == 'com_content' && $formname == 'com_content.article';
-        $isCategory = $option == 'com_categories' && $formname == 'com_categories.category' . $this->input->getCmd('extension', '');
+        $isCategory = $option == 'com_categories' && strpos($formname, 'com_categories.category') !== false;
         $isModule = ($option == 'com_modules' && $formname == 'com_modules.module') || ($option == 'com_advancedmodules' && $formname == 'com_advancedmodules.module');
-        $isPlugin = $option == 'com_plugins' && $formname == 'com_plugins.plugin';;
+        $isPlugin = $option == 'com_plugins' && $formname == 'com_plugins.plugin';
+        $isFields = $option == 'com_fields' && strpos($formname, 'com_fields.field') !== false;
+        $isTags = $option == 'com_tags' && $formname == 'com_tags.tag';
 
         $tp = $isSystem ? 'destsystem' : '';
         if (!$tp) {
@@ -122,6 +126,12 @@ class plgSystemAttrs extends CMSPlugin
         if (!$tp) {
             $tp = $isPlugin ? 'destplugins' : '';
         }
+        if (!$tp) {
+            $tp = $isFields ? 'destfields' : '';
+        }
+        if (!$tp) {
+            $tp = $isTags ? 'desttags' : '';
+        }
 
         if (!$tp) {
             return;
@@ -142,15 +152,12 @@ class plgSystemAttrs extends CMSPlugin
             $xml .= '<fieldset name="cookie">';
             $xml .= '<field name="attrssystemspacer" type="spacer" hr="true" />';
             $xml .= '<field name="attrssystemtitle" type="note" label="' . Text::_('PLG_ATTRS_TAB_LABEL') . '"/>';
-        }
-        if ($isMenu || $isUsers || $isContacts || $isCategory || $isPlugin) {
-            $xml .= '<fields name="params"><fieldset name="attrs" label="' . Text::_('PLG_ATTRS_TAB_LABEL') . '">';
-        }
-        if ($isArticle) {
-            $xml .= '<fields name="attribs"><fieldset name="attrs" label="' . Text::_('PLG_ATTRS_TAB_LABEL') . '">';
-        }
-        if ($isModule) {
+        } elseif ($isModule) {
             $xml .= '<fieldset name="attrs" label="' . Text::_('PLG_ATTRS_TAB_LABEL') . '"><fields name="params">';
+        } elseif ($isArticle) {
+            $xml .= '<fields name="attribs"><fieldset name="attrs" label="' . Text::_('PLG_ATTRS_TAB_LABEL') . '">';
+        } else {
+            $xml .= '<fields name="params"><fieldset name="attrs" label="' . Text::_('PLG_ATTRS_TAB_LABEL') . '">';
         }
 
         foreach ($fields as $f) {

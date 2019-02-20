@@ -16,5 +16,7 @@ CREATE TABLE IF NOT EXISTS `#__attrs` (
 	`destcategories` TINYINT NOT NULL,
 	`destmodules` TINYINT NOT NULL,
 	`destplugins` TINYINT NOT NULL,
+	`destfields` TINYINT NOT NULL,
+	`desttags` TINYINT NOT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

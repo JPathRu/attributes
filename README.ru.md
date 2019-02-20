@@ -1,5 +1,8 @@
 # Атрибуты
 
+![Joomla](https://img.shields.io/badge/joomla-3.7+-1A3867.svg?style=for-the-badge)
+![Php](https://img.shields.io/badge/php-5.6+-8892BF.svg?style=for-the-badge)
+
 Компонент реализует дополнительные атрибуты для следующих элементов:
 
 - системые параметры,

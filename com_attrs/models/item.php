@@ -3,6 +3,7 @@
 use Joomla\CMS\Factory;
 use Joomla\CMS\MVC\Model\AdminModel;
 use Joomla\CMS\Table\Table;
+use Joomla\CMS\Filter\OutputFilter;
 
 class AttrsModelItem extends AdminModel
 {
@@ -53,6 +54,10 @@ class AttrsModelItem extends AdminModel
 	public function save($data)
 	{
 		$data['val'] = json_encode($data['val']);
+		if (empty(trim($data['name']))) {
+			$data['name'] = trim($data['title']);
+		}
+		$data['name'] = OutputFilter::stringURLSafe($data['name']);
 		return parent::save($data);
 	}
 }

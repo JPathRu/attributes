@@ -19,6 +19,8 @@ class AttrsModelItems extends ListModel
 				'destcategories',
 				'destmodules',
 				'destplugins',
+				'destfields',
+				'desttags',
 				'id'
 			];
 		}
@@ -46,7 +48,7 @@ class AttrsModelItems extends ListModel
 	protected function getListQuery()
 	{
 		$query = $this->getDbo()->getQuery(true)
-			->select('id, published, title, name, tp, multiple, filter, destsystem, destmenu, destusers, destcontacts, destarticles, destcategories, destmodules, destplugins')
+			->select('*')
 			->from('#__attrs');
 
 		$published = $this->getState('filter.published');

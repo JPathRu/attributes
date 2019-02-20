@@ -44,7 +44,7 @@ $listDirn = $this->escape($this->state->get('list.direction'));
 						<th width="5%" class="center" style="min-width:55px;"><?php echo HTMLHelper::_('searchtools.sort', 'JSTATUS', 'published', $listDirn, $listOrder); ?></th>
 						<th class="has-context"><?php echo HTMLHelper::_('searchtools.sort', 'JGLOBAL_TITLE', 'title', $listDirn, $listOrder); ?></th>
 						<th class="hidden-phone"><?php echo Text::_('COM_ATTRS_TYPE'); ?></th>
-						<th width="20%" colspan="8"><?php echo Text::_('COM_ATTRS_DEST'); ?></th>
+						<th width="20%" colspan="10"><?php echo Text::_('COM_ATTRS_DEST'); ?></th>
 						<th width="1%" class="hidden-phone center nowrap"><?php echo HTMLHelper::_('searchtools.sort', 'JGRID_HEADING_ID', 'id', $listDirn, $listOrder); ?></th>
 					</tr>
 				</thead>
@@ -89,12 +89,14 @@ $listDirn = $this->escape($this->state->get('list.direction'));
 						
 						<td class="center hidden-phone"><span class="hasTooltip icon-joomla <?php echo ($item->destsystem ? '' : 'muted'); ?>" title="<?php echo Text::_('COM_ATTRS_DEST_SYSTEM'); ?>: <?php echo Text::_('COM_ATTRS_PUBLISH_' . $item->destsystem); ?>"></span></td>
 						<td class="center hidden-phone"><span class="hasTooltip icon-list <?php echo ($item->destmenu ? '' : 'muted'); ?>" title="<?php echo Text::_('COM_ATTRS_DEST_MENU'); ?>: <?php echo Text::_('COM_ATTRS_PUBLISH_' . $item->destmenu); ?>"></span></td>
-						<td class="center hidden-phone"><span class="hasTooltip icon-users -<?php echo ($item->destusers ? '' : 'muted'); ?>" title="<?php echo Text::_('COM_ATTRS_DEST_USERS'); ?>: <?php echo Text::_('COM_ATTRS_PUBLISH_' . $item->destusers); ?>"></span></td>
+						<td class="center hidden-phone"><span class="hasTooltip icon-users <?php echo ($item->destusers ? '' : 'muted'); ?>" title="<?php echo Text::_('COM_ATTRS_DEST_USERS'); ?>: <?php echo Text::_('COM_ATTRS_PUBLISH_' . $item->destusers); ?>"></span></td>
 						<td class="center hidden-phone"><span class="hasTooltip icon-address <?php echo ($item->destcontacts ? '' : 'muted'); ?>" title="<?php echo Text::_('COM_ATTRS_DEST_CONTACTS'); ?>: <?php echo Text::_('COM_ATTRS_PUBLISH_' . $item->destcontacts); ?>"></span></td>
 						<td class="center hidden-phone"><span class="hasTooltip icon-stack <?php echo ($item->destarticles ? '' : 'muted'); ?>" title="<?php echo Text::_('COM_ATTRS_DEST_ARTICLES'); ?>: <?php echo Text::_('COM_ATTRS_PUBLISH_' . $item->destarticles); ?>"></span></td>
 						<td class="center hidden-phone"><span class="hasTooltip icon-folder <?php echo ($item->destcategories ? '' : 'muted'); ?>" title="<?php echo Text::_('COM_ATTRS_DEST_CATEGORIES'); ?>: <?php echo Text::_('COM_ATTRS_PUBLISH_' . $item->destcategories); ?>"></span></td>
 						<td class="center hidden-phone"><span class="hasTooltip icon-cube <?php echo ($item->destmodules ? '' : 'muted'); ?>" title="<?php echo Text::_('COM_ATTRS_DEST_MODULES'); ?>: <?php echo Text::_('COM_ATTRS_PUBLISH_' . $item->destmodules); ?>"></span></td>
 						<td class="center hidden-phone"><span class="hasTooltip icon-power-cord <?php echo ($item->destplugins ? '' : 'muted'); ?>" title="<?php echo Text::_('COM_ATTRS_DEST_PLUGINS'); ?>: <?php echo Text::_('COM_ATTRS_PUBLISH_' . $item->destplugins); ?>"></span></td>
+						<td class="center hidden-phone"><span class="hasTooltip icon-puzzle <?php echo ($item->destfields ? '' : 'muted'); ?>" title="<?php echo Text::_('COM_ATTRS_DEST_FIELDS'); ?>: <?php echo Text::_('COM_ATTRS_PUBLISH_' . $item->destplugins); ?>"></span></td>
+						<td class="center hidden-phone"><span class="hasTooltip icon-tags <?php echo ($item->desttags ? '' : 'muted'); ?>" title="<?php echo Text::_('COM_ATTRS_DEST_TAGS'); ?>: <?php echo Text::_('COM_ATTRS_PUBLISH_' . $item->destplugins); ?>"></span></td>
 						
 						<td class="center hidden-phone"><?php echo $item->id; ?></td>
 					</tr>

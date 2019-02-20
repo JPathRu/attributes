@@ -12,29 +12,26 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 JFactory::getDocument()->addScriptDeclaration("
 	Joomla.submitbutton = function (task) {
 		
-		var msg_sn = '', msg_dest = '', msg_valid = '';
-		
-		var sn = /^[a-zA-Z0-9_]+$/.test(document.getElementById('jform_name').value);
+		var msg_dest = '', msg_valid = '';
 		
 		var ds = document.getElementById('jform_destsystem0').checked;
 		var dn = document.getElementById('jform_destmenu0').checked;
 		var du = document.getElementById('jform_destusers0').checked;
-		var dt = document.getElementById('jform_destcontacts0').checked;
+		var dn = document.getElementById('jform_destcontacts0').checked;
 		var da = document.getElementById('jform_destarticles0').checked;
 		var dc = document.getElementById('jform_destcategories0').checked;
 		var dm = document.getElementById('jform_destmodules0').checked;
 		var dp = document.getElementById('jform_destplugins0').checked;
+		var df = document.getElementById('jform_destfields0').checked;
+		var dt = document.getElementById('jform_desttags0').checked;
 		
-		var dest = ds || dn || du || dt || da || dc || dm || dp;
+		var dest = ds || dn || du || dn || da || dc || dm || dp || df || dt;
 		
 		var valid = document.formvalidator.isValid(document.id('item-form'));
 		
-		if (task == 'item.cancel' || (sn && dest && valid)) {
+		if (task == 'item.cancel' || (dest && valid)) {
 			Joomla.submitform(task, document.getElementById('item-form'));
 		} else {
-			if (!sn) {
-				msg_sn = '" . $this->escape(Text::_('COM_ATTRS_NAME_ERROR')) . "';
-			}
 			if (!dest) {
 				msg_dest = '" . $this->escape(Text::_('COM_ATTRS_DEST_ERROR')) . "';
 			}
@@ -43,7 +40,7 @@ JFactory::getDocument()->addScriptDeclaration("
 			}
 			
 			Joomla.JText.load({error:'" . $this->escape(Text::_('ERROR')) . "'});
-			Joomla.renderMessages({'error':[msg_sn, msg_dest, msg_valid]});
+			Joomla.renderMessages({'error':[msg_valid, msg_dest]});
 		}
 	}
 ");
@@ -96,6 +93,10 @@ JFactory::getDocument()->addScriptDeclaration("
 					<?php echo $this->form->renderField('destmodules'); ?>
 					
 					<?php echo $this->form->renderField('destplugins'); ?>
+					
+					<?php echo $this->form->renderField('destfields'); ?>
+					
+					<?php echo $this->form->renderField('desttags'); ?>
 					
 				</div>
 			</div>
