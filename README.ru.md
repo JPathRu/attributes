@@ -12,7 +12,9 @@
 - материалы,
 - категории,
 - модули,
-- плагины.
+- плагины,
+- поля,
+- метки.
 
 Значения атрибутов хранятся в параметрах соответствующего элемента, поле `params` (для материалов поле `attribs`).
 
@@ -50,6 +52,8 @@ AttrsHelper::ATTR_DEST_ARTICLES = 'articles'
 AttrsHelper::ATTR_DEST_CATEGORIES = 'categories'
 AttrsHelper::ATTR_DEST_MODULES = 'modules'
 AttrsHelper::ATTR_DEST_PLUGINS = 'plugins'
+AttrsHelper::ATTR_DEST_FIELDS = 'fields'
+AttrsHelper::ATTR_DEST_TAGS = 'tags'
 */
 
 JLoader::register('AttrsHelper', JPATH_ADMINISTRATOR . '/components/com_attrs/helpers/attrs.php');

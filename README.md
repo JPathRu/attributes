@@ -14,7 +14,9 @@ The component implements additional attributes for:
 - articles,
 - categories,
 - modules,
-- plugins.
+- plugins,
+- fields,
+- tags.
 
 Attribute values are stored in the parameters of the corresponding element, the `params` field (for articles in the `attribs` field).
 
@@ -51,6 +53,8 @@ AttrsHelper::ATTR_DEST_ARTICLES = 'articles'
 AttrsHelper::ATTR_DEST_CATEGORIES = 'categories'
 AttrsHelper::ATTR_DEST_MODULES = 'modules'
 AttrsHelper::ATTR_DEST_PLUGINS = 'plugins'
+AttrsHelper::ATTR_DEST_FIELDS = 'fields'
+AttrsHelper::ATTR_DEST_TAGS = 'tags'
 */
 
 JLoader::register('AttrsHelper', JPATH_ADMINISTRATOR . '/components/com_attrs/helpers/attrs.php');
