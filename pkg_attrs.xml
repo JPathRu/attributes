@@ -16,6 +16,6 @@
         <file type="plugin" group="system" id="attrs">plg_system_attrs.zip</file>
     </files>
     <updateservers>
-        <server type="extension" priority="1" name="Attributes package"><![CDATA[https://joomla-update.org/extensions/attrs/attrs_update.xml]]></server>
+        <server type="extension" priority="2" name="Attributes package"><![CDATA[https://joomla-update.org/extensions/attrs/attrs_update.xml]]></server>
     </updateservers>
 </extension>
