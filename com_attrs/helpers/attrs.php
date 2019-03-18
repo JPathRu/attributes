@@ -44,7 +44,7 @@ class AttrsHelper
 
         switch ($attrDest) {
             case self::ATTR_DEST_SYSTEM:
-                $attrValue = Factory::getConfig()->get($attrName, '');
+                $attrValue = Factory::getConfig()->get(str_replace('-', '_', $attrName), '');
                 break;
 
             case self::ATTR_DEST_MENU:

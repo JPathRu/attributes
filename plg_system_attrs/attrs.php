@@ -162,7 +162,7 @@ class plgSystemAttrs extends CMSPlugin
 
         foreach ($fields as $f) {
 
-            $name = ' name="attrs_' . $f->name . '"';
+            $name = ' name="attrs_' . str_replace('-', '_', $f->name) . '"';
             $label = ' label="' . $f->title . '"';
             $class = $f->class ? ' class="' . $f->class . '"' : ' class="input-xlarge"';
 
