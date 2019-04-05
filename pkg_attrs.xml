@@ -2,8 +2,8 @@
 <extension version="3.7" type="package" method="upgrade">
     <name>Attributes package</name>
     <packagename>attrs</packagename>
-    <version>1.2.2</version>
-    <creationDate>March 2019</creationDate>
+    <version>1.2.3</version>
+    <creationDate>April 2019</creationDate>
     <author>Aleksey A. Morozov</author>
     <authorEmail>alekvolsk@yandex.ru</authorEmail>
     <authorUrl>https://alekvolsk.pw</authorUrl>

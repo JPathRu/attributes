@@ -15,7 +15,7 @@ JFactory::getDocument()->addScriptDeclaration("
 		var msg_dest = '', msg_valid = '';
 		
 		var ds = document.getElementById('jform_destsystem0').checked;
-		var dn = document.getElementById('jform_destmenu0').checked;
+		var de = document.getElementById('jform_destmenu0').checked;
 		var du = document.getElementById('jform_destusers0').checked;
 		var dn = document.getElementById('jform_destcontacts0').checked;
 		var da = document.getElementById('jform_destarticles0').checked;
@@ -25,7 +25,7 @@ JFactory::getDocument()->addScriptDeclaration("
 		var df = document.getElementById('jform_destfields0').checked;
 		var dt = document.getElementById('jform_desttags0').checked;
 		
-		var dest = ds || dn || du || dn || da || dc || dm || dp || df || dt;
+		var dest = ds || de || du || dn || da || dc || dm || dp || df || dt;
 		
 		var valid = document.formvalidator.isValid(document.id('item-form'));
 		
