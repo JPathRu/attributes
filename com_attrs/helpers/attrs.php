@@ -21,11 +21,11 @@ class AttrsHelper
     {
         $db = Factory::getDbo();
         $query = $db->getQuery(true)
-            ->select('published')
-            ->from('#__attrs')
-            ->where('name=' . $db->quote(self::getSystemAttrName($attrName)));
+            ->select('`published`')
+            ->from('`#__attrs`')
+            ->where('`name` = ' . $db->quote(self::getSystemAttrName($attrName)));
         $published = $db->setQuery($query)->loadResult();
-        return (bool)$published;
+        return (bool) $published;
     }
 
     public static function getAttr($attrName, $attrDest, $id = 0)
@@ -58,10 +58,14 @@ class AttrsHelper
             case self::ATTR_DEST_CONTACTS:
                 $db = Factory::getDbo();
                 $query = $db->getQuery(true)
-                    ->select('params')
-                    ->from('#__contact_details')
-                    ->where('id=' . (int)$id);
-                $data = $db->setQuery($query)->loadResult();
+                    ->select('`params`')
+                    ->from('`#__contact_details`')
+                    ->where('`id` = ' . (int) $id);
+                try {
+                    $data = $db->setQuery($query)->loadResult();
+                } catch (Exception $e) {
+                    break;
+                }
                 $params = new Registry($data);
                 $attrValue = $params->get($attrName, '');
                 break;
@@ -85,10 +89,14 @@ class AttrsHelper
             case self::ATTR_DEST_PLUGINS:
                 $db = Factory::getDbo();
                 $query = $db->getQuery(true)
-                    ->select('params')
-                    ->from('#__extensions')
-                    ->where('extension_id=' . (int)$id);
-                $data = $db->setQuery($query)->loadResult();
+                    ->select('`params`')
+                    ->from('`#__extensions`')
+                    ->where('`extension_id` = ' . (int) $id);
+                try {
+                    $data = $db->setQuery($query)->loadResult();
+                } catch (Exception $e) {
+                    break;
+                }
                 $params = new Registry($data);
                 $attrValue = $params->get($attrName, '');
                 break;
@@ -96,10 +104,14 @@ class AttrsHelper
             case self::ATTR_DEST_FIELDS:
                 $db = Factory::getDbo();
                 $query = $db->getQuery(true)
-                    ->select('params')
-                    ->from('#__fields')
-                    ->where('id=' . (int)$id);
-                $data = $db->setQuery($query)->loadResult();
+                    ->select('`params`')
+                    ->from('`#__fields`')
+                    ->where('`id` = ' . (int) $id);
+                try {
+                    $data = $db->setQuery($query)->loadResult();
+                } catch (Exception $e) {
+                    break;
+                }
                 $params = new Registry($data);
                 $attrValue = $params->get($attrName, '');
                 break;
@@ -107,10 +119,14 @@ class AttrsHelper
             case self::ATTR_DEST_TAGS:
                 $db = Factory::getDbo();
                 $query = $db->getQuery(true)
-                    ->select('params')
-                    ->from('#__tags')
-                    ->where('id=' . (int)$id);
-                $data = $db->setQuery($query)->loadResult();
+                    ->select('`params`')
+                    ->from('`#__tags`')
+                    ->where('`id` = ' . (int) $id);
+                try {
+                    $data = $db->setQuery($query)->loadResult();
+                } catch (Exception $e) {
+                    break;
+                }
                 $params = new Registry($data);
                 $attrValue = $params->get($attrName, '');
                 break;
@@ -125,12 +141,12 @@ class AttrsHelper
         return $attrValue;
     }
 
-    protected static function getSystemAttrName($attrName)
+    private static function getSystemAttrName($attrName)
     {
         return str_replace('attrs_', '', $attrName);
     }
 
-    protected static function getParamsAttrName($attrName)
+    private static function getParamsAttrName($attrName)
     {
         if (strpos($attrName, 'attrs_') !== 0) {
             $attrName = 'attrs_' . $attrName;
@@ -138,4 +154,3 @@ class AttrsHelper
         return $attrName;
     }
 }
-

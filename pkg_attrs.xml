@@ -1,21 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension version="3.7" type="package" method="upgrade">
-    <name>Attributes package</name>
+<extension version="3.7.0" type="package" method="upgrade">
+    <name>PKG_ATTRS</name>
     <packagename>attrs</packagename>
-    <version>1.2.3</version>
-    <creationDate>April 2019</creationDate>
+    <version>1.2.4</version>
+    <creationDate>August 2019</creationDate>
     <author>Aleksey A. Morozov</author>
     <authorEmail>alekvolsk@yandex.ru</authorEmail>
     <authorUrl>https://alekvolsk.pw</authorUrl>
     <copyright>© 2019 Aleksey A. Morozov. All right reserved.</copyright>
     <license>GNU General Public License version 3 or later; see http://www.gnu.org/licenses/gpl-3.0.txt</license>
     <packager>Aleksey A. Morozov</packager>
-    <description>Attributes installation package</description>
+    <description>PKG_ATTRS_DESC</description>
+    <php_minimum>5.6</php_minimum>
+    <scriptfile>pkg_script.php</scriptfile>
+	<languages>
+		<language tag="en-GB">language/en-GB/en-GB.pkg_attrs.sys.ini</language>
+		<language tag="ru-RU">language/ru-RU/ru-RU.pkg_attrs.sys.ini</language>
+	</languages>
     <files>
         <file type="component" id="com_attrs">com_attrs.zip</file>
         <file type="plugin" group="system" id="attrs">plg_system_attrs.zip</file>
     </files>
     <updateservers>
-        <server type="extension" priority="2" name="Attributes package"><![CDATA[https://joomla-update.org/extensions/attrs/attrs_update.xml]]></server>
+        <server type="extension" priority="2" name="PKG_ATTRS"><![CDATA[https://joomla-update.org/extensions/attrs/attrs_update.xml]]></server>
     </updateservers>
 </extension>

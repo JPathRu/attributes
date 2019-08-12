@@ -10,9 +10,9 @@ JLoader::register('AttrsHelper', JPATH_ADMINISTRATOR . '/components/com_attrs/he
 
 class plgSystemAttrs extends CMSPlugin
 {
-    private
-        $input,
-        $isAdmin;
+    private $input;
+    
+    private $isAdmin;
 
     public function __construct(&$subject, $config)
     {
@@ -143,7 +143,7 @@ class plgSystemAttrs extends CMSPlugin
         }
 
         if (is_array($data)) {
-            $data = (object)$data;
+            $data = (object) $data;
         }
 
         $xml = '<?xml version="1.0" encoding="utf-8"?><form>';
@@ -160,19 +160,19 @@ class plgSystemAttrs extends CMSPlugin
             $xml .= '<fields name="params"><fieldset name="attrs" label="' . Text::_('PLG_ATTRS_TAB_LABEL') . '">';
         }
 
-        foreach ($fields as $f) {
+        foreach ($fields as $field) {
 
-            $name = ' name="attrs_' . ($isSystem ? str_replace('-', '_', $f->name) : $f->name) . '"';
-            $label = ' label="' . $f->title . '"';
-            $class = $f->class ? ' class="' . $f->class . '"' : ' class="input-xlarge"';
+            $name = ' name="attrs_' . ($isSystem ? str_replace('-', '_', $field->name) : $field->name) . '"';
+            $label = ' label="' . $field->title . '"';
+            $class = $field->class ? ' class="' . $field->class . '"' : ' class="input-xlarge"';
 
-            switch ($f->tp) {
+            switch ($field->tp) {
                 case 'text':
-                    $xml .= '<field type="text"' . $name . $label . $class . ($f->filter ? ' filter="' . $f->filter . '"' : '') . '/>';
+                    $xml .= '<field type="text"' . $name . $label . $class . ($field->filter ? ' filter="' . $field->filter . '"' : '') . '/>';
                     break;
 
                 case 'textarea':
-                    $xml .= '<field type="textarea"' . $name . $label . $class . ($f->filter ? ' filter="' . $f->filter . '"' : '') . ' rows="5"/>';
+                    $xml .= '<field type="textarea"' . $name . $label . $class . ($field->filter ? ' filter="' . $field->filter . '"' : '') . ' rows="5"/>';
                     break;
 
                 case 'editor':
@@ -180,8 +180,8 @@ class plgSystemAttrs extends CMSPlugin
                     break;
 
                 case 'list':
-                    $xml .= '<field type="list"' . $name . $label . $class . ($f->multiple ? ' multiple="true"' : '') . '>';
-                    foreach ($f->val as $val) {
+                    $xml .= '<field type="list"' . $name . $label . $class . ($field->multiple ? ' multiple="true"' : '') . '>';
+                    foreach ($field->val as $val) {
                         $xml .= '<option value="' . $val['vname'] . '">' . $val['vtitle'] . '</option>';
                     }
                     $xml .= '</field>';
@@ -209,22 +209,28 @@ class plgSystemAttrs extends CMSPlugin
         return true;
     }
 
-    protected function getData($tp)
+    private function getData($tp)
     {
         $db = Factory::getDbo();
 
         $query = $db->getQuery(true)
-            ->select('name, title, tp, val, multiple, filter, class')
-            ->from('#__attrs')
-            ->where($tp . ' = 1')
-            ->where('published = 1')
-            ->order('id asc');
+            ->select('`name`, `title`, `tp`, `val`, `multiple`, `filter`, `class`')
+            ->from('`#__attrs`')
+            ->where($db->quoteName($tp) . ' = 1')
+            ->where('`published` = 1')
+            ->order('`id` asc');
 
-        $list = $db->setQuery($query)->loadObjectList();
+        try {
+            $list = $db->setQuery($query)->loadObjectList();
+        } catch (Exception $e) {
+            $list = [];
+        }
 
-        foreach ($list as &$item) {
-            if ($item->tp === 'list' && $item->val !== '') {
-                $item->val = json_decode($item->val, true);
+        if ($list) {
+            foreach ($list as &$item) {
+                if ($item->tp === 'list' && $item->val !== '') {
+                    $item->val = json_decode($item->val, true);
+                }
             }
         }
 

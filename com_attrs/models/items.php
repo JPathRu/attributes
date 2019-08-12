@@ -8,20 +8,8 @@ class AttrsModelItems extends ListModel
 	{
 		if (empty($config['filter_fields'])) {
 			$config['filter_fields'] = [
-				'published',
-				'name',
-				'tp',
-				'destsystem',
-				'destmenu',
-				'destusers',
-				'destcontacts',
-				'destarticles',
-				'destcategories',
-				'destmodules',
-				'destplugins',
-				'destfields',
-				'desttags',
-				'id'
+				'published', 'name', 'tp', 'destsystem', 'destmenu', 'destusers', 'destcontacts',
+				'destarticles', 'destcategories', 'destmodules', 'destplugins', 'destfields', 'desttags', 'id'
 			];
 		}
 		parent::__construct($config);
@@ -47,29 +35,29 @@ class AttrsModelItems extends ListModel
 
 	protected function getListQuery()
 	{
-		$query = $this->getDbo()->getQuery(true)
+		$query = $this->_db->getQuery(true)
 			->select('*')
-			->from('#__attrs');
+			->from('`#__attrs`');
 
 		$published = $this->getState('filter.published');
 		if ($published !== '') {
-			$query->where('published = ' . (int)$published);
+			$query->where('`published` = ' . (int) $published);
 		}
 
 		$tp = $this->getState('filter.tp');
 		if ($tp !== '') {
-			$query->where('tp = ' . $this->getDbo()->Quote($tp));
+			$query->where('`tp` = ' . $this->_db->quote($tp));
 		}
 
 		$dest = $this->getState('filter.dest');
 		if ($dest !== '') {
-			$query->where($dest . ' = 1');
+			$query->where($this->_db->quoteName($dest) . ' = 1');
 		}
 
 		$search = $this->getState('filter.search');
 		if (!empty($search)) {
-			$search = $this->getDbo()->Quote('%' . $this->getDbo()->escape($search, true) . '%');
-			$query->where('(name like ' . $search . ' or title like ' . $search . ')');
+			$search = $this->_db->quote('%' . $this->_db->escape($search, true) . '%');
+			$query->where('(`name` like ' . $search . ' or `title` like ' . $search . ')');
 		}
 
 		$listOrder = $this->getState('list.ordering', 'name');
@@ -81,6 +69,6 @@ class AttrsModelItems extends ListModel
 
 	public function getListCount()
 	{
-		return (int)$this->getDbo()->setQuery('select count(*) from `#__attrs`')->loadResult();
+		return (int) $this->_db->setQuery('select count(*) from `#__attrs`')->loadResult();
 	}
 }

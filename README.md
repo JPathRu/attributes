@@ -1,6 +1,7 @@
 # Attributes
 
-![Version](https://img.shields.io/badge/VERSION-1.2.3-0366d6.svg?style=for-the-badge)
+![Last Update](https://img.shields.io/badge/last_update-2019.08.13-28A5F5.svg?style=for-the-badge)
+![Version](https://img.shields.io/badge/VERSION-1.2.4-0366d6.svg?style=for-the-badge)
 ![Joomla](https://img.shields.io/badge/joomla-3.7+-1A3867.svg?style=for-the-badge)
 ![Php](https://img.shields.io/badge/php-5.6+-8892BF.svg?style=for-the-badge)
 
@@ -69,7 +70,7 @@ $attrValue = AttrsHelper::getAttr($attrName, AttrsHelper::ATTR_DEST_ARTICLES, $a
 $attrValue = $item->params->get("arrts_$attrName", '');
 
 // for system
-$attrValue = Factory::getConfig->get("arrts_$attrName", '');
+$attrValue = Joomla\CMS\Factory::getConfig->get("arrts_$attrName", '');
 
 // for articles
 $attribs = json_decode($article->attribs, true);

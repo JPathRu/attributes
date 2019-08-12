@@ -5,6 +5,7 @@ use Joomla\CMS\MVC\View\HtmlView;
 use Joomla\CMS\Helper\ContentHelper;
 use Joomla\CMS\Toolbar\ToolbarHelper;
 use Joomla\CMS\Language\Text;
+use Symfony\Component\Yaml\Exception\RuntimeException;
 
 class AttrsViewItem extends HtmlView
 {
@@ -17,16 +18,15 @@ class AttrsViewItem extends HtmlView
 		$this->item = $this->get('Item');
 
 		if (count($errors = $this->get('Errors'))) {
-			\JError::raiseError(500, implode('\n', $errors));
-			return false;
+			throw new RuntimeException(implode("\n", $errors), 500);
 		}
 
 		$isNew = $this->item->id == 0;
 		ToolBarHelper::title(Text::_('COM_ATTRS_ITEM_TITLE_' . ($isNew ? 'ADD' : 'MOD')), 'puzzle');
-		Factory::getApplication()->input->set( 'hidemainmenu', true );
+		Factory::getApplication()->input->set('hidemainmenu', true);
 
-		$canDo = ContentHelper::getActions('com_attrs');
-		if ($canDo->get('core.manage')) {
+		$canDo = ContentHelper::getActions('com_attrs')->get('core.manage');
+		if ($canDo) {
 			ToolBarHelper::apply('item.apply');
 			ToolBarHelper::save('item.save');
 			ToolBarHelper::save2new('item.save2new');
