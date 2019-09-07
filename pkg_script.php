@@ -12,12 +12,18 @@ class pkg_attrsInstallerScript
             return true;
         }
 
+		$minJoomlaVersion = $parent->get('manifest')->attributes()->version[0];
+
+		if (!class_exists('Joomla\CMS\Version')) {
+			JFactory::getApplication()->enqueueMessage(JText::sprintf('J_JOOMLA_COMPATIBLE', JText::_($parent->get('manifest')->name[0]), $minJoomlaVersion), 'error');
+			return false;
+        }
+        
         $msg = '';
         $ver = new Version();
-        $name = Text::_($parent->manifest->name[0]);
-        $minPhpVersion = $parent->manifest->php_minimum[0];
+        $name = Text::_($parent->get('manifest')->name[0]);
+        $minPhpVersion = $parent->get('manifest')->php_minimum[0];
 
-        $minJoomlaVersion = $parent->manifest->attributes()->version[0];
         if (version_compare($ver->getShortVersion(), $minJoomlaVersion, 'lt')) {
             $msg .= Text::sprintf('PKG_SNIPPET_JOOMLA_COMPATIBLE', $name, $minJoomlaVersion);
         }

@@ -2,8 +2,8 @@
 <extension version="3.7.0" type="package" method="upgrade">
     <name>PKG_ATTRS</name>
     <packagename>attrs</packagename>
-    <version>1.2.4</version>
-    <creationDate>August 2019</creationDate>
+    <version>1.2.5</version>
+    <creationDate>September 2019</creationDate>
     <author>Aleksey A. Morozov</author>
     <authorEmail>alekvolsk@yandex.ru</authorEmail>
     <authorUrl>https://alekvolsk.pw</authorUrl>

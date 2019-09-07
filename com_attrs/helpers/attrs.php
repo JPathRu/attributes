@@ -6,16 +6,16 @@ use Joomla\Registry\Registry;
 
 class AttrsHelper
 {
-    public const ATTR_DEST_SYSTEM = 'system';
-    public const ATTR_DEST_MENU = 'menu';
-    public const ATTR_DEST_USERS = 'users';
-    public const ATTR_DEST_CONTACTS = 'contacts';
-    public const ATTR_DEST_ARTICLES = 'articles';
-    public const ATTR_DEST_CATEGORIES = 'categories';
-    public const ATTR_DEST_MODULES = 'modules';
-    public const ATTR_DEST_PLUGINS = 'plugins';
-    public const ATTR_DEST_FIELDS = 'fields';
-    public const ATTR_DEST_TAGS = 'tags';
+    const ATTR_DEST_SYSTEM = 'system';
+    const ATTR_DEST_MENU = 'menu';
+    const ATTR_DEST_USERS = 'users';
+    const ATTR_DEST_CONTACTS = 'contacts';
+    const ATTR_DEST_ARTICLES = 'articles';
+    const ATTR_DEST_CATEGORIES = 'categories';
+    const ATTR_DEST_MODULES = 'modules';
+    const ATTR_DEST_PLUGINS = 'plugins';
+    const ATTR_DEST_FIELDS = 'fields';
+    const ATTR_DEST_TAGS = 'tags';
 
     public static function isPublished($attrName)
     {
