@@ -2,7 +2,7 @@
 <extension version="3.7.0" type="package" method="upgrade">
     <name>PKG_ATTRS</name>
     <packagename>attrs</packagename>
-    <version>1.2.5</version>
+    <version>1.3.0</version>
     <creationDate>September 2019</creationDate>
     <author>Aleksey A. Morozov</author>
     <authorEmail>alekvolsk@yandex.ru</authorEmail>
@@ -18,8 +18,8 @@
 		<language tag="ru-RU">language/ru-RU/ru-RU.pkg_attrs.sys.ini</language>
 	</languages>
     <files>
-        <file type="component" id="com_attrs">com_attrs.zip</file>
-        <file type="plugin" group="system" id="attrs">plg_system_attrs.zip</file>
+        <folder type="component" id="com_attrs">com_attrs</folder>
+        <folder type="plugin" group="system" id="attrs">plg_system_attrs</folder>
     </files>
     <updateservers>
         <server type="extension" priority="2" name="PKG_ATTRS"><![CDATA[https://joomla-update.org/extensions/attrs/attrs_update.xml]]></server>

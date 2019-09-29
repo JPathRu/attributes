@@ -66,6 +66,8 @@ Factory::getDocument()->addScriptDeclaration("
 					<?php echo $this->form->renderField('filter'); ?>
 					
 					<?php echo $this->form->renderField('class'); ?>
+					
+					<?php echo $this->form->renderField('layout'); ?>
 
 					<hr>
 					

@@ -1,7 +1,7 @@
 # Attributes
 
-![Last Update](https://img.shields.io/badge/last_update-2019.09.08-28A5F5.svg?style=for-the-badge)
-![Version](https://img.shields.io/badge/VERSION-1.2.5-0366d6.svg?style=for-the-badge)
+![Last Update](https://img.shields.io/badge/last_update-2019.09.29-28A5F5.svg?style=for-the-badge)
+![Version](https://img.shields.io/badge/VERSION-1.3.0-0366d6.svg?style=for-the-badge)
 ![Joomla](https://img.shields.io/badge/joomla-3.7+-1A3867.svg?style=for-the-badge)
 ![Php](https://img.shields.io/badge/php-5.6+-8892BF.svg?style=for-the-badge)
 
@@ -24,26 +24,30 @@ Attribute values are stored in the parameters of the corresponding element, the 
 
 Every attribute name is prefixed with `attrs_` prefix. You can get the attribute value by the standard way described below.
 
+For each attribute, it is possible to specify an individual output layout. Layouts are created in the /templates/{your_template}/html/layouts/com_attrs/ folder and are assigned to each attribute separately. The attribute data inside the layout is contained in the `$displayData` structure. The default layout does not contain markup.
+
 ## Usage
 
 ### Shortcode, for use in content editor
 
-```
-{attrs;dest;id;attrName}
+```text
+{attrs;dest;id;attrNameЯ[;layout]}
 ```
 
 - `attrs` - reserved word
 - `dest` - belonging to a specific type of record, one of: system, menu, users, contacts, articles, categories, modules, plugins
 - `id` - ID of the corresponding entry for the specified property, specify 0 for systems
 - `attrName` - attribute system name
+- `layout` - output layout (optional), if **0** or **false** is specified, the assigned layout will be ignored and the attribute value will be displayed without layout; format for specifying the layout: `template:layoutname`, where _template_ is the main template of the site that contains the override (specify the underscore to indicate the default template), _layoutname_ is the name of the overridden layout file, without extension; when specifying a nonexistent layout, the attribute value will not be displayed
 
 **Important**: Unpublished attributes are ignored. Images are output without markup, only the path. Arrays are displayed as a list of values separated by commas.
 
 **Example**: You have created an attribute with the name test for a material with ID = 5, to get its value, insert the following line in the editor: `{attrs;articles;5;test}`.
+If you want to display the attribute indicating the override of the template created with the name mytemplate in the main protostar site template, insert the following line into the editor: `{attrs;articles;5;test;protostar:mytemplate}`.
 
 ### With helper
 
-It is recommended because it checks the status of the attribute (published / unpublished) and it is not necessary to specify the prefix `attrs_`. Skip the third parameter to get the attribute value from the system config.
+It is recommended because it checks the status of the attribute (published / unpublished) and it is not necessary to specify the prefix `attrs_`. Do not specify the third parameter or set it to zero to get the attribute value from the system configuration.
 
 ```php
 /*
@@ -60,10 +64,18 @@ AttrsHelper::ATTR_DEST_TAGS = 'tags'
 */
 
 JLoader::register('AttrsHelper', JPATH_ADMINISTRATOR . '/components/com_attrs/helpers/attrs.php');
+
+// output with the layout specified in the attribute parameters
 $attrValue = AttrsHelper::getAttr($attrName, AttrsHelper::ATTR_DEST_ARTICLES, $article->id);
+
+// priority layout output
+// the attribute layout will be loaded /templates/protostar/html/layouts/com_attrs/mytemplate.php
+$attrValue = AttrsHelper::getAttr($attrName, AttrsHelper::ATTR_DEST_ARTICLES, $article->id, 'protostar:mytemplate');
 ```
 
 ### Without helper (not recommended)
+
+This method does not support attribute standardization.
 
 ```php
 // default

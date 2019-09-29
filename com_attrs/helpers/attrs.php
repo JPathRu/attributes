@@ -3,6 +3,8 @@
 use Joomla\CMS\Factory;
 use Joomla\CMS\Table\Table;
 use Joomla\Registry\Registry;
+use Joomla\CMS\Filesystem\Path;
+use Joomla\CMS\Layout\FileLayout;
 
 class AttrsHelper
 {
@@ -17,25 +19,18 @@ class AttrsHelper
     const ATTR_DEST_FIELDS = 'fields';
     const ATTR_DEST_TAGS = 'tags';
 
-    public static function isPublished($attrName)
-    {
-        $db = Factory::getDbo();
-        $query = $db->getQuery(true)
-            ->select('`published`')
-            ->from('`#__attrs`')
-            ->where('`name` = ' . $db->quote(self::getSystemAttrName($attrName)));
-        $published = $db->setQuery($query)->loadResult();
-        return (bool) $published;
-    }
-
-    public static function getAttr($attrName, $attrDest, $id = 0)
+    public static function getAttr($attrName, $attrDest, $id = 0, $template = '')
     {
         $attrValue = '';
 
-        if (!self::isPublished($attrName)) {
+        $attrParams = self::getAttrParams($attrName);
+        if (!isset($attrParams) || !$attrParams['published']) {
             return $attrValue;
         }
-
+        if (!$attrParams['layout']) {
+            $attrParams['layout'] = '_:default';
+        }
+        
         if (!$id && $attrDest !== self::ATTR_DEST_SYSTEM) {
             return $attrValue;
         }
@@ -138,7 +133,30 @@ class AttrsHelper
             $attrValue = $params->get($attrName, '');
         }
 
-        return $attrValue;
+        if ($template === false) {
+            return $attrValue;
+        } else {
+            $layoutMask = $template ? $template : $attrParams['layout'];
+            $fileLayout = self::getLayoutPath($layoutMask);
+            $layout = new FileLayout(pathinfo($fileLayout, PATHINFO_FILENAME), null, ['component' => 'com_attrs']);
+            $layout->addIncludePath(pathinfo($fileLayout, PATHINFO_DIRNAME));
+            return $layout->render(['name' => self::getSystemAttrName($attrName), 'value' => $attrValue, 'dest' => $attrDest, 'id' => $id]);
+        }
+    }
+
+    private static function getAttrParams($attrName)
+    {
+        $db = Factory::getDbo();
+        $query = $db->getQuery(true)
+            ->select('`published`, `layout`')
+            ->from('`#__attrs`')
+            ->where('`name` = ' . $db->quote(self::getSystemAttrName($attrName)));
+        try {
+            $row = $db->setQuery($query)->loadAssoc();
+        } catch (\Exception $e) {
+            $row = [];
+        }
+        return $row;
     }
 
     private static function getSystemAttrName($attrName)
@@ -152,5 +170,32 @@ class AttrsHelper
             $attrName = 'attrs_' . $attrName;
         }
         return $attrName;
+    }
+    
+    private static function getLayoutPath($layout = 'default')
+    {
+        $template = Factory::getApplication()->getTemplate();
+        $defaultLayout = $layout;
+
+        if (strpos($layout, ':') !== false) {
+            $temp = explode(':', $layout);
+            $template = $temp[0] === '_' ? $template : $temp[0];
+            $layout = $temp[1];
+            $defaultLayout = $temp[1] ?: 'default';
+        }
+
+        $tPath = JPATH_THEMES . '/' . $template . '/html/layouts/com_attrs/' . $layout . '.php';
+        $bPath = JPATH_ADMINISTRATOR . '/components/com_attrs/layouts/' . $defaultLayout . '.php';
+        $dPath = JPATH_ADMINISTRATOR . '/components/com_attrs/layouts/default.php';
+
+        if (file_exists($tPath)) {
+            return Path::clean($tPath);
+        }
+
+        if (file_exists($bPath)) {
+            return Path::clean($bPath);
+        }
+
+        return Path::clean($dPath);
     }
 }

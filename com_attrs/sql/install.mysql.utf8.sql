@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS `#__attrs` (
 	`multiple` INT NOT NULL,
 	`filter` VARCHAR(20) NOT NULL,
 	`class` VARCHAR(50) NOT NULL,
+	`layout` VARCHAR(50) NOT NULL,
 	`destsystem` TINYINT NOT NULL,
 	`destmenu` TINYINT NOT NULL,
 	`destusers` TINYINT NOT NULL,

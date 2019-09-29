@@ -68,8 +68,9 @@ class plgSystemAttrs extends CMSPlugin
 
                 $id = trim($matcheslist[2]);
                 $attrName = trim($matcheslist[3]);
+                $template = isset($matcheslist[4]) ? (in_array(strtolower($matcheslist[4]), [0, '0', 'false'], true) ? false : $matcheslist[4]) : '';
 
-                $output = AttrsHelper::getAttr($attrName, $type, $id);
+                $output = AttrsHelper::getAttr($attrName, $type, $id, $template);
 
                 if (is_array($output)) {
                     $output = implode(', ', $output);

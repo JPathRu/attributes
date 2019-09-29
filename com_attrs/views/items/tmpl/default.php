@@ -71,7 +71,14 @@ $listDirn = $this->escape($this->state->get('list.direction'));
 							</a>
 							<?php } ?>
 							
-							<div class="small"><?php echo $this->escape($item->name); ?></div>
+							<div class="small">
+								<span class="hasTooltip" title="<?php echo Text::_('COM_ATTRS_NAME')?>" data-placement="bottom"><?php echo $this->escape($item->name); ?></span>,&nbsp;&nbsp;&nbsp;
+								<span class="hasTooltip" title="<?php echo Text::_('COM_ATTRS_LAYOUT')?>" data-placement="bottom"><?php
+									$layout = $this->escape($item->layout);
+									$layout = !$layout || $layout === '_:default' ? Text::_('COM_ATTRS_LAYOUTS_LAYOUT_DEFAULT') : $layout;
+									echo $layout;
+								?></span>
+							</div>
 						</td>
 						
 						<td class="nowrap">
