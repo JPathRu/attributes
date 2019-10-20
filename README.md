@@ -20,6 +20,20 @@ The component implements additional attributes for:
 - fields,
 - tags.
 
+The following attribute types are implemented:
+
+- text (`type="text"`),
+- multiline text (`type="textarea"`),
+- editor (`type="editor"`),
+- list (`type="list"`),
+- image (`type="media"`).
+
+Type **list** supports the multiple value option.
+
+Type **multiline text** supports the standard Joomla content filtering types: html, raw and others.
+
+WARNING! Types **multiline text** and **editor** are not recommended for system parameters: when restoring a site using Akeeba Backup, parameter values may be lost.
+
 Attribute values are stored in the parameters of the corresponding element, the `params` field (for articles in the `attribs` field).
 
 Every attribute name is prefixed with `attrs_` prefix. You can get the attribute value by the standard way described below.
