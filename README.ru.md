@@ -43,7 +43,7 @@
 ### Шорткод, для использования в контент-редакторе
 
 ```text
-{attrs;dest;id;attrNameЯ[;layout]}
+{attrs;dest;id;attrName[;layout]}
 ```
 
 - `attrs` - зарезервированное слово

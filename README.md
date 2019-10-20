@@ -45,7 +45,7 @@ For each attribute, it is possible to specify an individual output layout. Layou
 ### Shortcode, for use in content editor
 
 ```text
-{attrs;dest;id;attrNameЯ[;layout]}
+{attrs;dest;id;attrName[;layout]}
 ```
 
 - `attrs` - reserved word
