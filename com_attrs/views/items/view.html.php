@@ -40,11 +40,16 @@ class AttrsViewItems extends HtmlView
 				ToolbarHelper::deleteList('COM_ATTRS_DELETE_QUERY_STRING', 'items.delete', 'JTOOLBAR_DELETE');
 			}
 		}
+
 		$custom_button_html =
 			'<span style="display:inline-block;padding:0 15px;font-size:12px;line-height:25.5px;border:1px solid #d6e9c6;border-radius:3px;background-color:#dff0d8;color:#3c763d;">' .
 			Text::sprintf('COM_ATTRS_COUNT_ITEMS_VIEW', count($this->items), $this->allCount) .
 			'</span>';
 		Toolbar::getInstance('toolbar')->appendButton('Custom', $custom_button_html, 'options');
+		
+		if (ContentHelper::getActions('com_attrs')->get('core.admin')) {
+			ToolbarHelper::preferences('com_attrs');
+		}
 
 		parent::display($tpl);
 	}
