@@ -11,7 +11,7 @@ JLoader::register('AttrsHelper', JPATH_ADMINISTRATOR . '/components/com_attrs/he
 class plgSystemAttrs extends CMSPlugin
 {
     private $input;
-    
+
     private $isAdmin;
 
     public function __construct(&$subject, $config)
@@ -100,7 +100,7 @@ class plgSystemAttrs extends CMSPlugin
         $isContacts = $option == 'com_contact' && $formname == 'com_contact.contact';
         $isArticle = $option == 'com_content' && $formname == 'com_content.article';
         $isCategory = $option == 'com_categories' && strpos($formname, 'com_categories.category') !== false;
-        $isModule = ($option == 'com_modules' && $formname == 'com_modules.module') || ($option == 'com_advancedmodules' && $formname == 'com_advancedmodules.module');
+        $isModule = ($option == 'com_modules' && $formname == 'com_modules.module') || ($option == 'com_advancedmodules' && ($formname == 'com_advancedmodules.module' || $formname == 'com_modules.module'));
         $isPlugin = $option == 'com_plugins' && $formname == 'com_plugins.plugin';
         $isFields = $option == 'com_fields' && strpos($formname, 'com_fields.field') !== false;
         $isTags = $option == 'com_tags' && $formname == 'com_tags.tag';

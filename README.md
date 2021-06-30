@@ -1,7 +1,7 @@
 # Attributes
 
-![Last Update](https://img.shields.io/badge/last_update-2019.12.05-28A5F5.svg?style=for-the-badge)
-![Version](https://img.shields.io/badge/VERSION-1.3.1-0366d6.svg?style=for-the-badge)
+![Last Update](https://img.shields.io/badge/last_update-2021.07.01-28A5F5.svg?style=for-the-badge)
+![Version](https://img.shields.io/badge/VERSION-1.3.2-0366d6.svg?style=for-the-badge)
 ![Joomla](https://img.shields.io/badge/joomla-3.7+-1A3867.svg?style=for-the-badge)
 ![Php](https://img.shields.io/badge/php-5.6+-8892BF.svg?style=for-the-badge)
 
