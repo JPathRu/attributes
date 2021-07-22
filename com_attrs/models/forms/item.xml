@@ -4,72 +4,72 @@
         <field name="title" type="text" label="JGLOBAL_TITLE" required="true" class="input-xlarge"/>
         <field name="name" type="text" label="COM_ATTRS_NAME" description="COM_ATTRS_NAME_DEST" class="input-xlarge"/>
         <field name="tp" type="list" label="COM_ATTRS_TYPE" class="input-xlarge">
-		    <option value="text">COM_ATTRS_TYPE_TEXT</option>
-		    <option value="textarea">COM_ATTRS_TYPE_TEXTAREA</option>
-		    <option value="editor">COM_ATTRS_TYPE_EDITOR</option>
+            <option value="text">COM_ATTRS_TYPE_TEXT</option>
+            <option value="textarea">COM_ATTRS_TYPE_TEXTAREA</option>
+            <option value="editor">COM_ATTRS_TYPE_EDITOR</option>
             <option value="list">COM_ATTRS_TYPE_LIST</option>
             <option value="media">COM_ATTRS_TYPE_MEDIA</option>
-	    </field>
+        </field>
         <field name="val" type="subform" label="COM_ATTRS_VAL" multiple="true" layout="joomla.form.field.subform.repeatable-table" showon="tp:list">
             <form hidden="true" name="vform" repeat="true">
-            	<field name="vname" type="text" label="COM_ATTRS_VAL_NAME" class="input-xlarge"/>
+                <field name="vname" type="text" label="COM_ATTRS_VAL_NAME" class="input-xlarge"/>
                 <field name="vtitle" type="text" label="COM_ATTRS_VAL_TITLE" class="input-xlarge"/>
             </form>
         </field>
         <field name="multiple" type="radio" label="COM_ATTRS_VAL_MULTIPLE" default="0" class="btn-group" showon="tp:list">
-		    <option value="1">JYES</option>
-		    <option value="0">JNO</option>
-	    </field>
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
         <field name="filter" type="text" label="COM_ATTRS_VAL_FILTER" default="" class="input-xlarge" showon="tp:test[OR]tp:textarea"/>
         <field name="class" type="text" label="COM_ATTRS_CLASS" default="" class="input-xlarge" showon="tp!:editor"/>
         <field name="layout" type="layoutscomponent" label="COM_ATTRS_LAYOUT" default="_:default" class="input-xlarge"/>
 
-        
+
         <field name="destsystem" type="radio" label="COM_ATTRS_DEST_SYSTEM" default="0" class="btn-group">
-		    <option value="1">JYES</option>
-		    <option value="0">JNO</option>
-	    </field>
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
         <field name="destmenu" type="radio" label="COM_ATTRS_DEST_MENU" default="0" class="btn-group">
-		    <option value="1">JYES</option>
-		    <option value="0">JNO</option>
-	    </field>
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
         <field name="destusers" type="radio" label="COM_ATTRS_DEST_USERS" default="0" class="btn-group">
-		    <option value="1">JYES</option>
-		    <option value="0">JNO</option>
-	    </field>
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
         <field name="destcontacts" type="radio" label="COM_ATTRS_DEST_CONTACTS" default="0" class="btn-group">
-		    <option value="1">JYES</option>
-		    <option value="0">JNO</option>
-	    </field>
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
         <field name="destarticles" type="radio" label="COM_ATTRS_DEST_ARTICLES" default="0" class="btn-group">
-		    <option value="1">JYES</option>
-		    <option value="0">JNO</option>
-	    </field>
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
         <field name="destcategories" type="radio" label="COM_ATTRS_DEST_CATEGORIES" default="0" class="btn-group">
-		    <option value="1">JYES</option>
-		    <option value="0">JNO</option>
-	    </field>
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
         <field name="destmodules" type="radio" label="COM_ATTRS_DEST_MODULES" default="0" class="btn-group">
-		    <option value="1">JYES</option>
-		    <option value="0">JNO</option>
-	    </field>
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
         <field name="destplugins" type="radio" label="COM_ATTRS_DEST_PLUGINS" default="0" class="btn-group">
-		    <option value="1">JYES</option>
-		    <option value="0">JNO</option>
-	    </field>
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
         <field name="destfields" type="radio" label="COM_ATTRS_DEST_FIELDS" default="0" class="btn-group">
-		    <option value="1">JYES</option>
-		    <option value="0">JNO</option>
-	    </field>
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
         <field name="desttags" type="radio" label="COM_ATTRS_DEST_TAGS" default="0" class="btn-group">
-		    <option value="1">JYES</option>
-		    <option value="0">JNO</option>
-	    </field>
-        
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+
         <field name="published" type="radio" label="JSTATUS" default="1" class="btn-group">
-		    <option value="1">JPUBLISHED</option>
-		    <option value="0">JUNPUBLISHED</option>
-	    </field>
+            <option value="1">JPUBLISHED</option>
+            <option value="0">JUNPUBLISHED</option>
+        </field>
         <field name="id" type="text" default="0" label="JGLOBAL_FIELD_ID_LABEL" readonly="true"/>
     </fieldset>
 </form>

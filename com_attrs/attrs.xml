@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <extension type="component" version="3.7.0" method="upgrade">
     <name>COM_ATTRS</name>
-    <version>1.3.2</version>
+    <version>1.3.3</version>
     <creationDate>July 2021</creationDate>
     <author>Aleksey A. Morozov</author>
     <authorEmail>alekvolsk@yandex.ru</authorEmail>
@@ -9,27 +9,27 @@
     <copyright>© Aleksey A. Morozov. All right reserved.</copyright>
     <license>GNU General Public License version 3 or later; see http://www.gnu.org/licenses/gpl-3.0.txt</license>
     <description>COM_ATTRS_DESC</description>
-	<install>
-		<sql>
-			<file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
-		</sql>
-	</install>
-	<uninstall>
-		<sql>
-			<file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
-		</sql>
-	</uninstall>
-	<update>
-		<schemas>
-			<schemapath type="mysql">sql/updates/mysql</schemapath>
-		</schemas>
-	</update>
+    <install>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+        </sql>
+    </install>
+    <uninstall>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+        </sql>
+    </uninstall>
+    <update>
+        <schemas>
+            <schemapath type="mysql">sql/updates/mysql</schemapath>
+        </schemas>
+    </update>
     <administration>
         <menu>COM_ATTRS</menu>
         <files folder="admin">
             <filename>attrs.php</filename>
             <filename>controller.php</filename>
-			<filename>config.xml</filename>
+            <filename>config.xml</filename>
             <filename>access.xml</filename>
             <folder>controllers</folder>
             <folder>layouts</folder>

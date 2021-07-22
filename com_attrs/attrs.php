@@ -6,7 +6,7 @@ use Joomla\CMS\Language\Text;
 use Symfony\Component\Yaml\Exception\RuntimeException;
 
 if (!Factory::getUser()->authorise('core.manage', 'com_attrs')) {
-	throw new RuntimeException(Text::_('JERROR_ALERTNOAUTHOR'), 403);
+    throw new RuntimeException(Text::_('JERROR_ALERTNOAUTHOR'), 403);
 }
 
 $controller = BaseController::getInstance('attrs');
