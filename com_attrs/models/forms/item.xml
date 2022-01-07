@@ -22,7 +22,7 @@
         </field>
         <field name="filter" type="text" label="COM_ATTRS_VAL_FILTER" default="" class="input-xlarge" showon="tp:test[OR]tp:textarea"/>
         <field name="class" type="text" label="COM_ATTRS_CLASS" default="" class="input-xlarge" showon="tp!:editor"/>
-        <field name="layout" type="layoutscomponent" label="COM_ATTRS_LAYOUT" default="_:default" class="input-xlarge"/>
+        <field name="layout" type="layoutscomponent" label="COM_ATTRS_LAYOUT" default="_:default" class="form-select input-xlarge"/>
 
 
         <field name="destsystem" type="radio" label="COM_ATTRS_DEST_SYSTEM" default="0" class="btn-group">

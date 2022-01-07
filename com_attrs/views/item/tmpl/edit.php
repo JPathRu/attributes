@@ -20,7 +20,7 @@ if (Version::MAJOR_VERSION < 4) {
             var ds = document.getElementById('jform_destsystem0').checked;
             var dn = document.getElementById('jform_destmenu0').checked;
             var du = document.getElementById('jform_destusers0').checked;
-            var dn = document.getElementById('jform_destcontacts0').checked;
+            var db = document.getElementById('jform_destcontacts0').checked;
             var da = document.getElementById('jform_destarticles0').checked;
             var dc = document.getElementById('jform_destcategories0').checked;
             var dm = document.getElementById('jform_destmodules0').checked;
@@ -28,7 +28,7 @@ if (Version::MAJOR_VERSION < 4) {
             var df = document.getElementById('jform_destfields0').checked;
             var dt = document.getElementById('jform_desttags0').checked;
 
-            var dest = ds || dn || du || dn || da || dc || dm || dp || df || dt;
+            var dest = ds || dn || du || db || da || dc || dm || dp || df || dt;
 
             var valid = document.formvalidator.isValid(document.id('item-form'));
 
@@ -56,7 +56,7 @@ if (Version::MAJOR_VERSION < 4) {
             var ds = document.getElementById('jform_destsystem0').checked;
             var dn = document.getElementById('jform_destmenu0').checked;
             var du = document.getElementById('jform_destusers0').checked;
-            var dn = document.getElementById('jform_destcontacts0').checked;
+            var db = document.getElementById('jform_destcontacts0').checked;
             var da = document.getElementById('jform_destarticles0').checked;
             var dc = document.getElementById('jform_destcategories0').checked;
             var dm = document.getElementById('jform_destmodules0').checked;
@@ -64,7 +64,7 @@ if (Version::MAJOR_VERSION < 4) {
             var df = document.getElementById('jform_destfields0').checked;
             var dt = document.getElementById('jform_desttags0').checked;
 
-            var dest = ds || dn || du || dn || da || dc || dm || dp || df || dt;
+            var dest = ds || dn || du || db || da || dc || dm || dp || df || dt;
 
             if (task == 'item.cancel' || dest) {
                 Joomla.submitform(task, document.getElementById('item-form'));
